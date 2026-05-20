@@ -57,3 +57,12 @@ bridge link
 
 > 2: enp58s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 master br0 state forwarding priority 32 cost 100
 ```
+
+If I want to revert this process: 
+```bash
+sudo nmcli connection delete bridge-slave-enp58s0
+sudo nmcli connection delete br0
+sudo nmcli connection add type ethernet ifname enp58s0 con-name "Wired connection 1"
+sudo nmcli connection modify "Wired connection 1" connection.autoconnect yes
+sudo nmcli connection up "Wired connection 1"
+```
